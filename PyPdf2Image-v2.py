@@ -63,9 +63,6 @@ class Pdf2Image:
 
 	def run(self):
 		
-		# Inicio de ejecucion del script
-		start_time 	= time.time()
-
 		# Contenedor de resultados de consulta
 		data 		= ''
 
