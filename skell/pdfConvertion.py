@@ -85,7 +85,7 @@ class pdfConvertion:
 					if extension == 'pdf' and not os.path.exists(full_path + _file + '.jpg'):
 						
 						# Contamos las paginas del pdf
-						rxcountpages = re.compile(r"$\s*/Type\s*/Page[/\s]", re.MULTILINE|re.DOTALL)
+						rxcountpages = re.compile(r"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
 						data = file(full_path + _file,"rb").read()
 						page_count = len(rxcountpages.findall(data))
 						
