@@ -90,7 +90,7 @@ class pdfConvertion:
 						page_count = len(rxcountpages.findall(data))
 						
 						if page_count > 0:
-							print page_count
+							print "Paginas [%d] - PDF [%s]" % (page_count, full_path + _file)
 
 			else:
 				print "Directorio [%s] no localizado" % (full_path)
