@@ -75,7 +75,7 @@ class pdfConvertion:
 				for _file in os.listdir(full_path):
 					print _file
 			else:
-				print "Directorio [%s] no localizado" & (full_path)
+				print "Directorio [%s] no localizado" % (full_path)
 
 			# print(full_path)
 			# print("%s/%s/%s/" % (self.mainPath,_dir[0].strip().strip('\n\r'),_dir[1]))
