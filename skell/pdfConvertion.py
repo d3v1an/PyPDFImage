@@ -87,7 +87,7 @@ class pdfConvertion:
 						# Contamos las paginas del pdf
 						rxcountpages = re.compile(r"$\s*/Type\s*/Page[/\s]", re.MULTILINE|re.DOTALL)
 						data = file(_dir + _file,"rb").read()
-						print len(rxcountpages.findall(data)
+						print len(rxcountpages.findall(data))
 
 			else:
 				print "Directorio [%s] no localizado" % (full_path)
