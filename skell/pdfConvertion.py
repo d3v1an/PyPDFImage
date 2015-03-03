@@ -47,7 +47,7 @@ class pdfConvertion:
 		p.start()
 
 		# Wait for 10 seconds or until process finishes
-		p.join(10)
+		p.join( (60*60) )
 
 		# If thread is still active
 		if p.is_alive():
