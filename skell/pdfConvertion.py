@@ -7,6 +7,8 @@ import subprocess
 import pwd
 import grp
 import sys
+import re
+
 # Multi proceso
 import multiprocessing
 import time
@@ -47,7 +49,7 @@ class pdfConvertion:
 		p.start()
 
 		# Wait for 10 seconds or until process finishes
-		p.join( (60*60) )
+		p.join( (60*5) )
 
 		# If thread is still active
 		if p.is_alive():
@@ -72,10 +74,21 @@ class pdfConvertion:
 			
 			# Verificamos si el directorio exuste
 			if(os.path.exists(full_path)):
+
+				# Recorremos el directorio
 				for _file in os.listdir(full_path):
-					print _file
-			# else:
-			# 	print "Directorio [%s] no localizado" % (full_path)
+					
+					# Obtenemos la extencion del archivo
+					extension = os.path.splitext(_dir + _file)[1][1:]
+
+					# Si es pdf y no contiene imagen sera procesada
+					if extension == 'pdf' and not os.path.exists(_dir + _file + '.jpg'):
+						# Contamos las paginas del pdf
+						rxcountpages = re.compile(r"$\s*/Type\s*/Page[/\s]", re.MULTILINE|re.DOTALL)
+						data = file(_dir + _file,"rb").read()
+						print len(rxcountpages.findall(data)
+			else:
+				print "Directorio [%s] no localizado" % (full_path)
 
 			# print(full_path)
 			# print("%s/%s/%s/" % (self.mainPath,_dir[0].strip().strip('\n\r'),_dir[1]))
