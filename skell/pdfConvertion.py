@@ -89,7 +89,7 @@ class pdfConvertion:
 						data = file(full_path + _file,"rb").read()
 						page_count = len(rxcountpages.findall(data))
 						
-						if page_count > 0:
+						if page_count > 1:
 							print "Paginas [%d] - PDF [%s]" % (page_count, full_path + _file)
 
 			else:
