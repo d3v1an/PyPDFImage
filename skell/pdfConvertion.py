@@ -79,14 +79,14 @@ class pdfConvertion:
 				for _file in os.listdir(full_path):
 					
 					# Obtenemos la extencion del archivo
-					extension = os.path.splitext(_dir + _file)[1][1:]
+					extension = os.path.splitext(full_path + _file)[1][1:]
 
 					# Si es pdf y no contiene imagen sera procesada
-					if extension == 'pdf' and not os.path.exists(_dir + _file + '.jpg'):
+					if extension == 'pdf' and not os.path.exists(full_path + _file + '.jpg'):
 						
 						# Contamos las paginas del pdf
 						rxcountpages = re.compile(r"$\s*/Type\s*/Page[/\s]", re.MULTILINE|re.DOTALL)
-						data = file(_dir + _file,"rb").read()
+						data = file(full_path + _file,"rb").read()
 						print len(rxcountpages.findall(data))
 
 			else:
