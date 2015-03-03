@@ -124,7 +124,8 @@ class Pdf2Image:
 
 				# Ejecutando proceso de conversion
 				print "\tConvertiendo el archivo \t: " + _file + ' ' + _pdf_size
-				command = ['convert','-density','180','-trim',_dir + _file,'-quality','90','-channel','RGB',_dir + _file + '.jpg']
+				# command = ['convert','-density','180','-trim',_dir + _file,'-quality','90','-channel','RGB',_dir + _file + '.jpg']
+				command = ['convert','-density','180',_dir + _file,'-quality','90','-channel','RGB',_dir + _file + '.jpg']
 				subprocess.call(command, stdout=outfd, stderr=errfd)
 
 				if os.path.exists(_dir + _file + '.jpg'):

@@ -1,2 +1,4 @@
 pypdfimg.cfg
 *.pyc
+*.pdf
+*.jpg

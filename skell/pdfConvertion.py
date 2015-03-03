@@ -32,15 +32,6 @@ class pdfConvertion:
 		# Diccionario con la informacion de los periodicos
 		self.dataDict 	= data_dic
 
-		# for _dir in self.dataDict:
-		# 	print("%s - /%s/%s/" % (threadName,_dir[0].strip().strip('\n\r'), _dir[1]))
-		# while counter:
-		# 	if exitFlag:
-		# 		thread.exit()
-		# 	time.sleep(delay)
-		# 	print "%s: %s\r" % (threadName, time.ctime(time.time()))
-		# 	counter -= 1
-
 	def run(self):
 		# print self.test
 
@@ -89,11 +80,11 @@ class pdfConvertion:
 						data = file(full_path + _file,"rb").read()
 						page_count = len(rxcountpages.findall(data))
 						
-						if page_count > 1:
-							print "Paginas [%d] - PDF [%s]" % (page_count, full_path + _file)
+						if page_count > 1 and page_count < 3:
+							print "(%s) Paginas [%d] - PDF [%s]" % (self.tName,page_count, full_path + _file)
 
 			else:
-				print "Directorio [%s] no localizado" % (full_path)
+				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
 
 			# print(full_path)
 			# print("%s/%s/%s/" % (self.mainPath,_dir[0].strip().strip('\n\r'),_dir[1]))
