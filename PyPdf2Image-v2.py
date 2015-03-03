@@ -83,14 +83,8 @@ class Pdf2Image:
 			tDict[k] = d3Thread(i,k,periodicos)
 			i += 1
 
+			# Despliegue de thread de conversion
 			tDict[k].start()
-
-			# Recorremos cada periodico
-			# for p in periodicos:
-
-				# En este punto crearemos un hilo pr cada serie de periodicos
-				# postereormente se procezara 
-				# print p[0], " ", p[1], "\r"
 
 if __name__ == '__main__':
 

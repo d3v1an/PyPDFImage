@@ -5,6 +5,12 @@
 import threading
 import time
 
+# Configuracion
+#  Parsers
+import ConfigParser
+
+from pdfConvertion import *
+
 # Flag d salida?
 exitFlag = 0
 
@@ -15,25 +21,39 @@ class d3Thread (threading.Thread):
 	threadID	= 0
 	threadName	= ''
 	dataDict	= {}
+	mainPath 	= ''
 
 	# Contructor
 	def __init__(self, threadID, name, dataDict):
+
+		# Configuracion de thread
 		threading.Thread.__init__(self)
 		self.threadID 	= threadID
 		self.threadName	= name
 		self.dataDict	= dataDict
 
+		# Carga de archivo de configuracion
+		config = ConfigParser.ConfigParser()
+		config.read('pypdfimg.cfg')
+
+		# Directorio principal
+		self.mainPath = config.get('paths', 'periodicos')
+
 	# Despliegue de aplicacion
 	def run(self):
-		print "Starting " + self.threadName + " convertions"
-		self.print_time(self.threadName, 3, 5)
-		print "Exiting " + self.threadName + " convertions"
+
+		# Inicio de ejecucion del hilo
+		start_time = time.time()
+
+		print("Inicio de hilo (%s) de conversión de periódicos.\r\n" % (self.threadName))
+		
+		self.convertion(self.threadName)
+
+		print("Fin de hilo (%s) de conversión de periódicos. Tiempo de ejecusion (%.5f segundos)\r\n" % (self.threadName, (time.time() - start_time)))
 
 	# Funcion de prueba
-	def print_time(self, threadName, delay, counter):
-		while counter:
-			if exitFlag:
-				thread.exit()
-			time.sleep(delay)
-			print "%s: %s\r" % (threadName, time.ctime(time.time()))
-			counter -= 1
+	def convertion(self, threadName):
+		
+		# Despliegue de aplicacion
+		p2i = pdfConvertion(threadName, self.mainPath, self.dataDict);
+		p2i.run()

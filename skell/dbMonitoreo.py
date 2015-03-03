@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
 
-#  Commons
+# Commons
 import MySQLdb
+import ast
 
-#  Parsers
+# Config Parsers
 import ConfigParser
 
 class dbMonitoreo:
@@ -14,6 +15,7 @@ class dbMonitoreo:
 	DB_USER = ''
 	DB_PASS = ''
 	DB_NAME = ''
+	DB_UTF8	= False
 
 	# Objeto de coneccion a la base de datos
 	conn 	= ''
@@ -32,11 +34,12 @@ class dbMonitoreo:
 		self.DB_USER = config.get('database', 'user')
 		self.DB_PASS = config.get('database', 'pass')
 		self.DB_NAME = config.get('database', 'db')
+		self.DB_UTF8 = ast.literal_eval(config.get('database', 'utf8'))
 
 	def connect(self):
 
 		# Configuracion de base de datos
-		conf = [self.DB_HOST, self.DB_USER, self.DB_PASS, self.DB_NAME]
+		conf = [self.DB_HOST, self.DB_USER, self.DB_PASS, self.DB_NAME, self.DB_UTF8]
 
 		# Conectamos a mysql
 		self.conn = MySQLdb.connect(*conf)
@@ -48,6 +51,13 @@ class dbMonitoreo:
 
 		# Conectamso con la base de datos
 		self.connect()
+
+		# Encodado UTF8
+		if(self.DB_UTF8):
+			self.conn.set_character_set('utf8')
+			self.cursor.execute('SET NAMES utf8;')
+			self.cursor.execute('SET CHARACTER SET utf8;')
+			self.cursor.execute('SET character_set_connection=utf8;')
 
 		# Query para periodicos del estado de mexico y df?
 		query = _query
