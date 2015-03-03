@@ -83,6 +83,7 @@ class pdfConvertion:
 
 					# Si es pdf y no contiene imagen sera procesada
 					if extension == 'pdf' and not os.path.exists(_dir + _file + '.jpg'):
+						
 						# Contamos las paginas del pdf
 						rxcountpages = re.compile(r"$\s*/Type\s*/Page[/\s]", re.MULTILINE|re.DOTALL)
 						data = file(_dir + _file,"rb").read()
