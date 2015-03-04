@@ -50,15 +50,16 @@ class Pdf2Image:
 	def __init__(self):
 
 		# Verificamos que no exista el archivo lock
-		self.lock_file = os.path.dirname(os.path.abspath(__file__)) + '/PyPdf2Image-v2.lock'
+		# self.lock_file = os.path.dirname(os.path.abspath(__file__)) + '/PyPdf2Image-v2.lock'
+		self.lock_file = ''
 
 		# Bloqueamos el sistema si ya esta en ejecusion
-		if os.path.exists(self.lock_file):
-			print "El sistema ya se encuentra ejecutandose"
-			sys.exit()
+		# if os.path.exists(self.lock_file):
+		# 	print "El sistema ya se encuentra ejecutandose"
+		# 	sys.exit()
 
 		# Bloqueamos la ejecucion
-		open(self.lock_file, 'w').close()
+		# open(self.lock_file, 'w').close()
 
 		config_file = os.path.dirname(os.path.abspath(__file__)) + '/pypdfimg.cfg'
 

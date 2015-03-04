@@ -66,9 +66,9 @@ class pdfConvertion:
 		if p.is_alive():
 			
 			# Eliminamos el archivo lock
-			if(self.is_last):
-				if os.path.exists(self.lock_file):
-					os.remove(self.lock_file)
+			# if(self.is_last):
+			# 	if os.path.exists(self.lock_file):
+			# 		os.remove(self.lock_file)
 
 			print "Matando proceso ciclado [%s]" % (self.tName)
 
@@ -182,9 +182,9 @@ class pdfConvertion:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
 
 		# Eliminamos el archivo lock
-		if(self.is_last):
-			if os.path.exists(self.lock_file):
-				os.remove(self.lock_file)
+		# if(self.is_last):
+		# 	if os.path.exists(self.lock_file):
+		# 		os.remove(self.lock_file)
 
 		# Cerramos los archivos de salida
 		outfd.close()
