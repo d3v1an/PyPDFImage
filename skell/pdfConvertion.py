@@ -115,14 +115,24 @@ class pdfConvertion:
 							# Asignacion de permisos
 							if os.path.exists(pdf_file + '.jpg'):
 
-								# Re asignando permisos
-								self.updatePermisionsAndVisivility(pdf_file + '.jpg')
-
 								# Tamaño original del archivo jpg
 								_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
 
 								# Informacion del archivo convertido
 								print "(%s) Paginas [%d] - [%s] - JPG [%s]" % (self.tName,page_count, _jpg_size, pdf_file + '.jpg')
+
+								# optimizacion de imagen
+								command = ['jpegoptim',pdf_file + '.jpg','-v','--max=80','--strip-all','-p','-t','--strip-iptc','--strip-icc']
+								subprocess.call(command, stdout=outfd, stderr=errfd)
+
+								# Tamaño original del archivo jpg post compress
+								_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
+
+								# Informacion del archivo convertido
+								print "(%s) Paginas [%d] - [%s] - JPG [%s]" % (self.tName,page_count, _jpg_size, pdf_file + '.jpg')
+
+								# Re asignando permisos
+								self.updatePermisionsAndVisivility(pdf_file + '.jpg')
 
 			else:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
