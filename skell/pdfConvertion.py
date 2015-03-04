@@ -120,8 +120,8 @@ class pdfConvertion:
 							subprocess.call(command, stdout=outfd, stderr=errfd)
 
 							# Removemos los archivos des-unidos
+							os.remove(full_path + file_name + '-0.jpg')
 							os.remove(full_path + file_name + '-1.jpg')
-							os.remove(full_path + file_name + '-2.jpg')
 
 							# Tamaño original del archivo jpg
 							_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
