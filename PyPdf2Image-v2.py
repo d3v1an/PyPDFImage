@@ -60,9 +60,11 @@ class Pdf2Image:
 		# Bloqueamos la ejecucion
 		open(self.lock_file, 'w').close()
 
+		config_file = os.path.dirname(os.path.abspath(__file__)) + '/pypdfimg.cfg'
+
 		# Carga de archivo de configuracion
 		self.config = ConfigParser.ConfigParser()
-		self.config.read('pypdfimg.cfg')
+		self.config.read(config_file)
 
 		# Asignacion de clase conectora a db
 		self.dbm = dbMonitoreo(self.config)
