@@ -100,8 +100,39 @@ class pdfConvertion:
 						page_count 		= len(rxcountpages.findall(data))
 						
 						# Si el pdf contiene 2 paginas hacemso el merge de las mismas
-						#if page_count > 1 and page_count < 3:
-						#	print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, pdf_file_size, pdf_file)
+						if page_count > 1 and page_count < 3:
+
+							# Nombre base del archivo y su configuracion (Nombre y extension)
+							file_data 	= os.path.splitext(os.path.basename(pdf_file))
+							file_name 	= file_data[0]
+							file_ext 	= file_data[1]
+
+							# Inicio de conversion
+							command = ['convert','-density','180',pdf_file,'-quality','90','-channel','RGB',pdf_file + '.jpg']
+							subprocess.call(command, stdout=outfd, stderr=errfd)
+
+							#
+							#	En este punto la aplicacion crea un par de imagenes ocn nombres -1 y -2
+							#
+
+							# Se realiza el merge de las imagenes generadas
+							command = ['convert','-append',full_path + file_name '\-*.jpg',pdf_file + '.jpg']
+							subprocess.call(command, stdout=outfd, stderr=errfd)
+
+							# Removemos los archivos des-unidos
+							os.remove(full_path + file_name '-1.jpg')
+							os.remove(full_path + file_name '-2.jpg')
+
+							# Tamaño original del archivo jpg
+							_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
+
+							print "(%s) Paginas [%d] - [%s] - IMG [%s]" % (self.tName,page_count, pdf_file_size, _jpg_size)
+
+							# optimizacion de imagen
+							command = ['jpegoptim',pdf_file + '.jpg','-v','--max=80','--strip-all','-p','-t','--strip-iptc','--strip-icc']
+							subprocess.call(command, stdout=outfd, stderr=errfd)
+
+							print "(%s) Paginas [%d] - [%s] - IMG [%s]" % (self.tName,page_count, pdf_file_size, _jpg_size)
 
 						# Si el pdf contiene 1 pagina
 						if page_count == 1:
