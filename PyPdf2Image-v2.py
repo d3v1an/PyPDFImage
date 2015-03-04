@@ -43,24 +43,10 @@ class Pdf2Image:
 	# Objeto de configuracion
 	config 		= ''
 
-	# Lock file
-	lock_file	= None
-
 	# Método constructor 
 	def __init__(self):
 
-		# Verificamos que no exista el archivo lock
-		# self.lock_file = os.path.dirname(os.path.abspath(__file__)) + '/PyPdf2Image-v2.lock'
-		self.lock_file = ''
-
-		# Bloqueamos el sistema si ya esta en ejecusion
-		# if os.path.exists(self.lock_file):
-		# 	print "El sistema ya se encuentra ejecutandose"
-		# 	sys.exit()
-
-		# Bloqueamos la ejecucion
-		# open(self.lock_file, 'w').close()
-
+		# Archivo de configuracion
 		config_file = os.path.dirname(os.path.abspath(__file__)) + '/pypdfimg.cfg'
 
 		# Carga de archivo de configuracion
@@ -102,7 +88,7 @@ class Pdf2Image:
 			periodicos = self.dbm.query(queries[k])
 
 			# Creamos los threads por cada query
-			tDict[k] = d3Thread(i,k,periodicos, is_last, self.lock_file, self.config)
+			tDict[k] = d3Thread(i,k,periodicos, is_last, self.config)
 			i += 1
 
 			# Despliegue de thread de conversion
