@@ -93,6 +93,10 @@ class pdfConvertion:
 						if page_count > 1 and page_count < 3:
 							print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, pdf_file_size, pdf_file)
 
+						# Si el pdf contiene 1 pagina
+						if page_count <= 1:
+							print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, pdf_file_size, pdf_file)
+
 			else:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
 
