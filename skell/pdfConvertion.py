@@ -104,7 +104,7 @@ class pdfConvertion:
 						#	print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, pdf_file_size, pdf_file)
 
 						# Si el pdf contiene 1 pagina
-						if page_count <= 1:
+						if page_count == 1:
 
 							print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, pdf_file_size, pdf_file)
 							
@@ -136,6 +136,10 @@ class pdfConvertion:
 
 			else:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
+
+		# Cerramos los archivos de salida
+		outfd.close()
+		errfd.close()
 
 	# Funcion para cambiar los permisos, usuarioy grupo de las imagenes
 	def updatePermisionsAndVisivility(self,_file):
