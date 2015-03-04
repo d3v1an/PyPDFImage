@@ -126,13 +126,13 @@ class pdfConvertion:
 							# Tamaño original del archivo jpg
 							_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
 
-							print "(%s) Paginas [%d] - [%s] - IMG [%s]" % (self.tName,page_count, pdf_file_size, _jpg_size)
+							print "(%s) Paginas [%d] - [%s] - IMG [%s]" % (self.tName,page_count, _jpg_size, pdf_file + '.jpg')
 
 							# optimizacion de imagen
 							command = ['jpegoptim',pdf_file + '.jpg','-v','--max=80','--strip-all','-p','-t','--strip-iptc','--strip-icc']
 							subprocess.call(command, stdout=outfd, stderr=errfd)
 
-							print "(%s) Paginas [%d] - [%s] - IMG [%s]" % (self.tName,page_count, pdf_file_size, _jpg_size)
+							print "(%s) Paginas [%d] - [%s] - IMG [%s]" % (self.tName,page_count, _jpg_size, pdf_file + '.jpg')
 
 						# Si el pdf contiene 1 pagina
 						if page_count == 1:
