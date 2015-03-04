@@ -13,6 +13,10 @@ import re
 import multiprocessing
 import time
 
+# Configuracion
+#  Parsers
+import ConfigParser
+
 class pdfConvertion:
 
 	# Configuracion
