@@ -45,12 +45,9 @@ class d3Thread (threading.Thread):
 
 		# Inicio de ejecucion del hilo
 		start_time = time.time()
-
-		print("Inicio de hilo (%s) de conversión de periódicos.\r\n" % (self.threadName))
-		
+		print("Inicio de hilo (%s) de conversión de periódicos." % (self.threadName))
 		self.convertion(self.threadName)
-
-		print("Fin de hilo (%s) de conversión de periódicos. Tiempo de ejecusion (%.5f segundos)\r\n" % (self.threadName, (time.time() - start_time)))
+		print("Fin de hilo (%s) de conversión de periódicos. Tiempo de ejecusion (%.5f segundos)" % (self.threadName, (time.time() - start_time)))
 
 	# Funcion de prueba
 	def convertion(self, threadName):

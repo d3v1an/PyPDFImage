@@ -19,6 +19,7 @@ class pdfConvertion:
 	tName 		= ''
 	mainPath 	= ''
 	dataDict 	= None
+	timeOut 	= 0
 
 	# Contructor
 	def __init__(self, threadName, path, data_dic):
@@ -32,6 +33,13 @@ class pdfConvertion:
 		# Diccionario con la informacion de los periodicos
 		self.dataDict 	= data_dic
 
+		# Carga de archivo de configuracion
+		config = ConfigParser.ConfigParser()
+		config.read('pypdfimg.cfg')
+
+		# Timeout
+		self.timeOut = int(config.get('convert', 'timeout'))
+
 	def run(self):
 		# print self.test
 
@@ -41,7 +49,7 @@ class pdfConvertion:
 
 		# Wait for 10 seconds or until process finishes
 		#p.join( (60*5) )
-		p.join( 5 )
+		p.join( self.timeOut )
 
 		# If thread is still active
 		if p.is_alive():
