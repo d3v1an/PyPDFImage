@@ -82,7 +82,7 @@ class pdfConvertion:
 						pdf_file_size = self.size_format(os.path.getsize(pdf_file))
 
 						# Ejecutando proceso de conversion
-						print "\tConvertiendo el archivo \t: " + pdf_file + ' ' + pdf_file_size
+						# print "\tConvertiendo el archivo \t: " + pdf_file + ' ' + pdf_file_size
 						
 						# Contamos las paginas del pdf
 						rxcountpages 	= re.compile(r"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
