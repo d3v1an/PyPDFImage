@@ -65,7 +65,7 @@ class Pdf2Image:
 		self.config.read('pypdfimg.cfg')
 
 		# Asignacion de clase conectora a db
-		self.dbm = dbMonitoreo()
+		self.dbm = dbMonitoreo(self.config)
 
 		# Mensaje de bienvenida
 		print self.DIVLINE
@@ -99,7 +99,7 @@ class Pdf2Image:
 			periodicos = self.dbm.query(queries[k])
 
 			# Creamos los threads por cada query
-			tDict[k] = d3Thread(i,k,periodicos, is_last, self.lock_file)
+			tDict[k] = d3Thread(i,k,periodicos, is_last, self.lock_file, self.config)
 			i += 1
 
 			# Despliegue de thread de conversion

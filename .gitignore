@@ -1,4 +1,6 @@
 pypdfimg.cfg
+/common/*.pyc
+/skell/*.pyc
 *.pyc
 *.pdf
 *.jpg

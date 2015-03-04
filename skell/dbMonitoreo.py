@@ -23,11 +23,10 @@ class dbMonitoreo:
 	# Cursor de coneccion
 	cursor 	= ''
 
-	def __init__(self):
+	def __init__(self, conf):
 
 		# Carga de archivo de configuracion
-		config = ConfigParser.RawConfigParser()
-		config.read('pypdfimg.cfg')
+		config = conf
 
 		# Configurando el sistema
 		self.DB_HOST = config.get('database', 'host')

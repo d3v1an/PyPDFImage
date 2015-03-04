@@ -25,9 +25,10 @@ class d3Thread (threading.Thread):
 	mainPath 	= ''
 	is_last 	= False
 	lock_file 	= None
+	config 		= None
 
 	# Contructor
-	def __init__(self, threadID, name, dataDict, is_last, lock_file):
+	def __init__(self, threadID, name, dataDict, is_last, lock_file, conf):
 
 		# Configuracion de thread
 		threading.Thread.__init__(self)
@@ -38,11 +39,10 @@ class d3Thread (threading.Thread):
 		self.lock_file 	= lock_file
 
 		# Carga de archivo de configuracion
-		config = ConfigParser.ConfigParser()
-		config.read('pypdfimg.cfg')
+		self.config = conf
 
 		# Directorio principal
-		self.mainPath = config.get('paths', 'periodicos')
+		self.mainPath = self.config.get('paths', 'periodicos')
 
 	# Despliegue de aplicacion
 	def run(self):
@@ -57,5 +57,5 @@ class d3Thread (threading.Thread):
 	def convertion(self, threadName):
 		
 		# Despliegue de aplicacion
-		p2i = pdfConvertion(threadName, self.mainPath, self.dataDict, self.is_last, self.lock_file)
+		p2i = pdfConvertion(threadName, self.mainPath, self.dataDict, self.is_last, self.lock_file, self.config)
 		p2i.run()

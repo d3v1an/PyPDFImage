@@ -28,7 +28,7 @@ class pdfConvertion:
 	lock_file 	= None
 
 	# Contructor
-	def __init__(self, threadName, path, data_dic, is_last, lock_file):
+	def __init__(self, threadName, path, data_dic, is_last, lock_file, conf):
 		
 		# Nombre de hilo actual
 		self.tName 		= threadName
@@ -46,8 +46,7 @@ class pdfConvertion:
 		self.lock_file 	= lock_file
 
 		# Carga de archivo de configuracion
-		config = ConfigParser.ConfigParser()
-		config.read('pypdfimg.cfg')
+		config = conf
 
 		# Timeout
 		self.timeOut = int(config.get('convert', 'timeout'))
