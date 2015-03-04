@@ -9,6 +9,7 @@ import time
 #  Parsers
 import ConfigParser
 
+# D3
 from pdfConvertion import *
 
 # Flag d salida?

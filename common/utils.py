@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*
 
 # Funcion para obtener el tamaño de los archivos de manera humanizada
-def size_format(self,b):
+def size_format(b):
 	if b < 1000:
 		return "%i" % b + 'B'
 	elif 1000 <= b < 1000000:
