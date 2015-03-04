@@ -87,8 +87,8 @@ class pdfConvertion:
 						page_count 		= len(rxcountpages.findall(data))
 						
 						# Si el pdf contiene 2 paginas hacemso el merge de las mismas
-						if page_count > 1 and page_count < 3:
-							print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, pdf_file_size, pdf_file)
+						#if page_count > 1 and page_count < 3:
+						#	print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, pdf_file_size, pdf_file)
 
 						# Si el pdf contiene 1 pagina
 						if page_count <= 1:
@@ -109,7 +109,7 @@ class pdfConvertion:
 								_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
 
 								# Informacion del archivo convertido
-								print "Archivo convertido \t\t: [%s] [%s]" % (_file + '.jpg', _jpg_size)
+								print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, _jpg_size, _file + '.jpg')
 
 			else:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
