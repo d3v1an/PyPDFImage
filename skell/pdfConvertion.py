@@ -80,9 +80,6 @@ class pdfConvertion:
 
 						# Tamaño original del archivo pdf
 						pdf_file_size = self.size_format(os.path.getsize(pdf_file))
-
-						# Ejecutando proceso de conversion
-						# print "\tConvertiendo el archivo \t: " + pdf_file + ' ' + pdf_file_size
 						
 						# Contamos las paginas del pdf
 						rxcountpages 	= re.compile(r"/Type\s*/Page([^s]|$)", re.MULTILINE|re.DOTALL)
@@ -95,10 +92,38 @@ class pdfConvertion:
 
 						# Si el pdf contiene 1 pagina
 						if page_count <= 1:
+
 							print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, pdf_file_size, pdf_file)
+							
+							# Inicio de conversion
+							command = ['convert','-density','180',pdf_file,'-quality','90','-channel','RGB',pdf_file + '.jpg']
+							subprocess.call(command, stdout=outfd, stderr=errfd)
+
+							# Asignacion de permisos
+							if os.path.exists(pdf_file + '.jpg'):
+
+								# Re asignando permisos
+								self.updatePermisionsAndVisivility(pdf_file + '.jpg')
+
+								# Tamaño original del archivo jpg
+								_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
+
+								# Informacion del archivo convertido
+								print "Archivo convertido \t\t: [%s] [%s]" % (_file + '.jpg', _jpg_size)
 
 			else:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
+
+	# Funcion para cambiar los permisos, usuarioy grupo de las imagenes
+	def updatePermisionsAndVisivility(self,_file):
+
+		# Cambiamos el grupo
+		uid = pwd.getpwnam("captura").pw_uid
+		gid = grp.getgrnam("captura").gr_gid
+		os.chown(_file, uid, gid)
+
+		# Cambiamos permisos
+		os.system('chmod 777 ' + _file.replace(" ","\ "))
 
 	# Funcion para obtener el tamaño de los archivos de manera humanizada
 	def size_format(self,b):
