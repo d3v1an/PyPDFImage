@@ -57,7 +57,7 @@ class pdfConvertion:
 
 		# If thread is still active
 		if p.is_alive():
-			print "running... let's kill it... " + self.tName
+			print "Matando proceso ciclado [%s]" % (self.tName)
 
 		# Terminate
 		p.terminate()
