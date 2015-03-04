@@ -24,9 +24,11 @@ class pdfConvertion:
 	mainPath 	= ''
 	dataDict 	= None
 	timeOut 	= 0
+	is_last 	= False
+	lock_file 	= None
 
 	# Contructor
-	def __init__(self, threadName, path, data_dic):
+	def __init__(self, threadName, path, data_dic, is_last, lock_file):
 		
 		# Nombre de hilo actual
 		self.tName 		= threadName
@@ -36,6 +38,12 @@ class pdfConvertion:
 
 		# Diccionario con la informacion de los periodicos
 		self.dataDict 	= data_dic
+
+		# Saber si es el ultimo thread
+		self.is_last 	= is_last
+
+		# Archivo de lock
+		self.lock_file 	= lock_file
 
 		# Carga de archivo de configuracion
 		config = ConfigParser.ConfigParser()
@@ -57,6 +65,12 @@ class pdfConvertion:
 
 		# If thread is still active
 		if p.is_alive():
+			
+			# Eliminamos el archivo lock
+			if(self.is_last):
+				if os.path.exists(self.lock_file):
+					os.remove(self.lock_file)
+
 			print "Matando proceso ciclado [%s]" % (self.tName)
 
 		# Terminate
@@ -167,6 +181,11 @@ class pdfConvertion:
 
 			else:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
+
+		# Eliminamos el archivo lock
+		if(self.is_last):
+			if os.path.exists(self.lock_file):
+				os.remove(self.lock_file)
 
 		# Cerramos los archivos de salida
 		outfd.close()

@@ -23,15 +23,19 @@ class d3Thread (threading.Thread):
 	threadName	= ''
 	dataDict	= {}
 	mainPath 	= ''
+	is_last 	= False
+	lock_file 	= None
 
 	# Contructor
-	def __init__(self, threadID, name, dataDict):
+	def __init__(self, threadID, name, dataDict, is_last, lock_file):
 
 		# Configuracion de thread
 		threading.Thread.__init__(self)
 		self.threadID 	= threadID
 		self.threadName	= name
 		self.dataDict	= dataDict
+		self.is_last 	= is_last
+		self.lock_file 	= lock_file
 
 		# Carga de archivo de configuracion
 		config = ConfigParser.ConfigParser()
@@ -53,5 +57,5 @@ class d3Thread (threading.Thread):
 	def convertion(self, threadName):
 		
 		# Despliegue de aplicacion
-		p2i = pdfConvertion(threadName, self.mainPath, self.dataDict);
+		p2i = pdfConvertion(threadName, self.mainPath, self.dataDict, self.is_last, self.lock_file)
 		p2i.run()

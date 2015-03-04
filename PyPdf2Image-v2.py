@@ -27,24 +27,38 @@ from skell.d3Thread import *
 class Pdf2Image:
 
 	# Configuracion de conversion pdf > img
-	DENSITY = ''
-	QUALITY = ''
-	CHANNEL = ''
+	DENSITY 	= ''
+	QUALITY 	= ''
+	CHANNEL 	= ''
 
 	# Mensage de inicializacion
-	WELCOME = "Ejecutando Script para exportar PDF's a Imagenes (V2)"
+	WELCOME 	= "Ejecutando Script para exportar PDF's a Imagenes (V2)"
 
 	# Propiedades relativas al formato 
-	DIVLINE = "="*80
+	DIVLINE 	= "="*80
 
 	# Contenedor de clase para el monitoreo de periodicos
-	dbm 	= ''
+	dbm 		= ''
 
 	# Objeto de configuracion
-	config 	= ''
+	config 		= ''
+
+	# Lock file
+	lock_file	= None
 
 	# Método constructor 
 	def __init__(self):
+
+		# Verificamos que no exista el archivo lock
+		self.lock_file = os.path.dirname(os.path.abspath(__file__)) + '/PyPdf2Image-v2.lock'
+
+		# Bloqueamos el sistema si ya esta en ejecusion
+		if os.path.exists(self.lock_file):
+			print "El sistema ya se encuentra ejecutandose"
+			sys.exit()
+
+		# Bloqueamos la ejecucion
+		open(lock_file, 'w').close()
 
 		# Carga de archivo de configuracion
 		self.config = ConfigParser.ConfigParser()
@@ -76,11 +90,16 @@ class Pdf2Image:
 		i = 1
 		for k in queries:
 
+			# Saber si es el ultimo thread
+			is_last = False
+			if(i==len(queries)):
+				is_last = True
+
 			# Obtenemos los periodicos y la fecha actual
 			periodicos = self.dbm.query(queries[k])
 
 			# Creamos los threads por cada query
-			tDict[k] = d3Thread(i,k,periodicos)
+			tDict[k] = d3Thread(i,k,periodicos, is_last, self.lock_file)
 			i += 1
 
 			# Despliegue de thread de conversion
