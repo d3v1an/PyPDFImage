@@ -58,7 +58,7 @@ class Pdf2Image:
 			sys.exit()
 
 		# Bloqueamos la ejecucion
-		open(lock_file, 'w').close()
+		open(self.lock_file, 'w').close()
 
 		# Carga de archivo de configuracion
 		self.config = ConfigParser.ConfigParser()
