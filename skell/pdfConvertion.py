@@ -116,7 +116,7 @@ class pdfConvertion:
 							#
 
 							# Se realiza el merge de las imagenes generadas
-							command = ['convert','-append',full_path + file_name '\-*.jpg',pdf_file + '.jpg']
+							command = ['convert','-append',full_path + file_name + '\-*.jpg',pdf_file + '.jpg']
 							subprocess.call(command, stdout=outfd, stderr=errfd)
 
 							# Removemos los archivos des-unidos
