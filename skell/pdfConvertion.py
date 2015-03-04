@@ -109,7 +109,7 @@ class pdfConvertion:
 								_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
 
 								# Informacion del archivo convertido
-								print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, _jpg_size, _file + '.jpg')
+								print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, _jpg_size, pdf_file + '.jpg')
 
 			else:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
