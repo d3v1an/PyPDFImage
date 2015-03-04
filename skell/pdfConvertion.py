@@ -40,7 +40,8 @@ class pdfConvertion:
 		p.start()
 
 		# Wait for 10 seconds or until process finishes
-		p.join( (60*5) )
+		#p.join( (60*5) )
+		p.join( 5 )
 
 		# If thread is still active
 		if p.is_alive():
@@ -109,7 +110,7 @@ class pdfConvertion:
 								_jpg_size = self.size_format(os.path.getsize(pdf_file + '.jpg'))
 
 								# Informacion del archivo convertido
-								print "(%s) Paginas [%d] - [%s] - PDF [%s]" % (self.tName,page_count, _jpg_size, pdf_file + '.jpg')
+								print "(%s) Paginas [%d] - [%s] - JPG [%s]" % (self.tName,page_count, _jpg_size, pdf_file + '.jpg')
 
 			else:
 				print "(%s) Directorio [%s] no localizado" % (self.tName,full_path)
